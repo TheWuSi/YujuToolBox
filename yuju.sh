@@ -1310,6 +1310,7 @@ download_zsh(){
 	chsh -s $(which zsh)
     starship_install -y
     echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+    echo 'eval "$(starship init bash)"' >> ~/.bashrc
     echo "zsh+Starship安装完成,重新登录终端即可启用"
 }
 #endregion
