@@ -817,20 +817,6 @@ starship_install(){
       esac
     }
     
-    # Make sure user is not using zsh or non-POSIX-mode bash, which can cause issues
-    verify_shell_is_posix_or_exit() {
-      if [ -n "${ZSH_VERSION+x}" ]; then
-        error "Running installation script with \`zsh\` is known to cause errors."
-        error "Please use \`sh\` instead."
-        exit 1
-      elif [ -n "${BASH_VERSION+x}" ] && [ -z "${POSIXLY_CORRECT+x}" ]; then
-        error "Running installation script with non-POSIX \`bash\` may cause errors."
-        error "Please use \`sh\` instead."
-        exit 1
-      else
-        true  # No-op: no issues detected
-      fi
-    }
     
     get_tmpfile() {
       suffix="$1"
@@ -1199,9 +1185,7 @@ starship_install(){
     if [ -z "${VERSION-}" ]; then
       VERSION="latest"
     fi
-    
-    # Non-POSIX shells can break once executing code due to semantic differences
-    verify_shell_is_posix_or_exit
+
     
     # parse argv variables
     while [ "$#" -gt 0 ]; do
