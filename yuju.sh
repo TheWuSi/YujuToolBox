@@ -313,7 +313,7 @@ system_swap(){
     }
     
     add_swap(){
-    echo -e "${green}请输入需要添加的swap，建议为内存的2倍！【单位为M】${white}"
+    echo -e "${green}请输入需要添加的swap，建议为内存的2倍！【单位为MB】${white}"
     read -p "请输入swap数值:" swapsize
     
     #检查是否存在swapfile
