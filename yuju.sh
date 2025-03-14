@@ -1341,7 +1341,7 @@ docker_install(){
     # 判断国家是否为中国（CN）
     if [ "$country" == "CN" ]; then
         echo "本机器地理位置为中国，正在使用国内安装脚本..."
-	sudo curl -fsSL https://get.docker.com| bash -s docker --mirror Aliyun
+	bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
         rm -f ./docker-install
         echo "Docker安装完成，正在切换镜像源（由1panel提供）..."
         touch /etc/docker/daemon.json
