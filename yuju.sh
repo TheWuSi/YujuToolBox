@@ -79,7 +79,7 @@ yuju_sh() {
 #region //root用户检测
 root_test(){
     clear
-    [ "$EUID" -ne 0 ] && echo -e "${red}提示: ${bai}该功能需要root用户才能运行！" && break_end && yuju_sh
+    [ "$EUID" -ne 0 ] && echo -e "${red}提示: ${white}该功能需要root用户才能运行！" && break_end && yuju_sh
 }
 #endregion
 
@@ -184,7 +184,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 start_space=$(df / | tail -n 1 | awk '{print $3}')
-echo -e "${huang}正在进行系统清理...${bai}"
+echo -e "${yellow}正在进行系统清理...${white}"
 # 检测并设置包管理器变量
 if command -v apt-get > /dev/null; then
     PKG_MANAGER="apt"
@@ -1410,7 +1410,7 @@ docker_status(){
 #region //4.3 Docker清理无用的镜像容器网络
 docker_clean(){
     clear
-    read -p "$(echo -e "${huang}提示: ${bai}将清理无用的镜像容器网络，包括停止的容器，确定清理吗？(Y/N): ")" choice
+    read -p "$(echo -e "${yellow}提示: ${white}将清理无用的镜像容器网络，包括停止的容器，确定清理吗？(Y/N): ")" choice
     case "$choice" in
       [Yy])
         docker system prune -af --volumes
@@ -1521,7 +1521,7 @@ docker_ipv6_off(){
 #region //4.9 卸载Docker环境
 docker_uninstall(){
     clear
-    read -p "$(echo -e "${hong}注意: ${bai}确定卸载docker环境吗？(Y/N): ")" choice
+    read -p "$(echo -e "${hong}注意: ${white}确定卸载docker环境吗？(Y/N): ")" choice
     case "$choice" in
       [Yy])
         docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
@@ -1856,13 +1856,13 @@ onekey_optimization(){
     echo "- 更新系统软件包"
     echo "- 系统清理"
     echo -e "- OpenSSH升级"
-    echo -e "- 设置时区到${huang}上海${bai}"
-    echo -e "- 设置虚拟内存${huang}物理内存的2倍${bai}"
+    echo -e "- 设置时区到${yellow}上海${white}"
+    echo -e "- 设置虚拟内存${yellow}物理内存的2倍${white}"
     echo -e "- 安装fail2ban"
-    echo -e "- 安装${huang}所有常用工具${bai}"
+    echo -e "- 安装${yellow}所有常用工具${white}"
     echo -e "- 系统配置参数调优"
-    echo -e "- 开启${huang}BBRx${bai}加速"
-    echo -e "- 设置SSH端口号为${huang}55520${bai}"
+    echo -e "- 开启${yellow}BBRx${white}加速"
+    echo -e "- 设置SSH端口号为${yellow}55520${white}"
     echo -e "- 修改为密钥登录"
     echo -e "${pink}============================${white}"
 	echo -e "${red}注意：请牢记端口号和密钥，否则重启后无法登录${white}"
@@ -1873,19 +1873,19 @@ onekey_optimization(){
         clear
         echo -e "${pink}============================${white}"
         system_update
-        echo -e "[${lv}OK${bai}] 1/11. 更新系统到最新"
+        echo -e "[${green}OK${white}] 1/11. 更新系统到最新"
     
         echo -e "${pink}============================${white}"
         system_clean
-        echo -e "[${lv}OK${bai}] 2/11. 清理系统垃圾文件"
+        echo -e "[${green}OK${white}] 2/11. 清理系统垃圾文件"
     
         echo -e "${pink}============================${white}"
         system_openssh
-        echo -e "[${lv}OK${bai}] 3/11. OpenSSH升级"
+        echo -e "[${green}OK${white}] 3/11. OpenSSH升级"
     
         echo -e "${pink}============================${white}"
         system_time
-        echo -e "[${lv}OK${bai}] 4/11. 设置时区到${huang}上海${bai}"
+        echo -e "[${green}OK${white}] 4/11. 设置时区到${yellow}上海${white}"
     
         echo -e "${pink}============================${white}"
         # 确保脚本以root权限运行
@@ -1930,24 +1930,24 @@ onekey_optimization(){
         echo -e "\e[32mswap创建成功，当前swap信息如下：\e[0m"
         cat /proc/swaps
         cat /proc/meminfo | grep Swap
-        echo -e "[${lv}OK${bai}] 5/11. 设置虚拟内存${huang}物理内存的2倍${bai}"
+        echo -e "[${green}OK${white}] 5/11. 设置虚拟内存${yellow}物理内存的2倍${white}"
     
         echo -e "${pink}============================${white}"
         system_fail2ban
-        echo -e "[${lv}OK${bai}] 6/11. 安装fail2ban"
+        echo -e "[${green}OK${white}] 6/11. 安装fail2ban"
     
         echo -e "${pink}============================${white}"
         download_all
         docker_install
-        echo -e "[${lv}OK${bai}] 7/11. 安装${huang}Docker等常用工具${bai}"
+        echo -e "[${green}OK${white}] 7/11. 安装${yellow}Docker等常用工具${white}"
     
         echo -e "${pink}============================${white}"
         system_optimization
-        echo -e "[${lv}OK${bai}] 8/11. 系统配置参数调优"
+        echo -e "[${green}OK${white}] 8/11. 系统配置参数调优"
     
         echo -e "${pink}============================${white}"
         system_bbr
-        echo -e "[${lv}OK${bai}] 9/11. bbrx已安装，重启生效"
+        echo -e "[${green}OK${white}] 9/11. bbrx已安装，重启生效"
 
         echo -e "${pink}============================${white}"
         # 修改sshd配置文件中的端口号
@@ -1958,15 +1958,15 @@ onekey_optimization(){
         
         # 输出成功信息
         echo "SSH端口已修改为 55520"
-        echo -e "[${lv}OK${bai}] 10/11. 设置SSH端口号为${huang}55520${bai}"
+        echo -e "[${green}OK${white}] 10/11. 设置SSH端口号为${yellow}55520${white}"
 
         echo -e "${pink}============================${white}"
         system_keygen
-        echo -e "[${lv}OK${bai}] 11/11. 修改为密钥登录"
+        echo -e "[${green}OK${white}] 11/11. 修改为密钥登录"
         echo -e "${pink}============================${white}"
  
         clear
-        echo -e "${lv}一键优化已完成，BBRx在重启后生效${bai}"
+        echo -e "${green}一键优化已完成，BBRx在重启后生效${white}"
         echo "您现在的SSH端口为55520，您的SSH Key如下，请牢记："
         cat ~/.ssh/id_rsa
 
