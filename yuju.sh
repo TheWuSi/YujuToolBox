@@ -388,11 +388,11 @@ system_swap(){
 
 #region //1.8 修改SSH端口
 system_ssh(){
-    # 提示用户输入端口号，默认值为55520
-    read -p "请输入要设置的SSH端口号（按Enter使用默认端口55520）: " PORT
+    # 提示用户输入端口号，默认值为41120
+    read -p "请输入要设置的SSH端口号（按Enter使用默认端口41120）: " PORT
     
-    # 如果用户直接按Enter键，设置端口为默认值55520
-    PORT=${PORT:-55520}
+    # 如果用户直接按Enter键，设置端口为默认值41120
+    PORT=${PORT:-41120}
     
     # 修改sshd配置文件中的端口号
     sudo sed -i "s/^#\?Port .*/Port $PORT/g" /etc/ssh/sshd_config
@@ -1862,7 +1862,7 @@ onekey_optimization(){
     echo -e "- 安装${yellow}所有常用工具${white}"
     echo -e "- 系统配置参数调优"
     echo -e "- 开启${yellow}BBRx${white}加速"
-    echo -e "- 设置SSH端口号为${yellow}55520${white}"
+    echo -e "- 设置SSH端口号为${yellow}41120${white}"
     echo -e "- 修改为密钥登录"
     echo -e "${pink}============================${white}"
 	echo -e "${red}注意：请牢记端口号和密钥，否则重启后无法登录${white}"
@@ -1951,14 +1951,14 @@ onekey_optimization(){
 
         echo -e "${pink}============================${white}"
         # 修改sshd配置文件中的端口号
-        sudo sed -i "s/^#\?Port .*/Port 55520/g" /etc/ssh/sshd_config
+        sudo sed -i "s/^#\?Port .*/Port 41120/g" /etc/ssh/sshd_config
         
         # 重启SSH服务以应用更改
         sudo systemctl restart sshd
         
         # 输出成功信息
-        echo "SSH端口已修改为 55520"
-        echo -e "[${green}OK${white}] 10/11. 设置SSH端口号为${yellow}55520${white}"
+        echo "SSH端口已修改为 41120"
+        echo -e "[${green}OK${white}] 10/11. 设置SSH端口号为${yellow}41120${white}"
 
         echo -e "${pink}============================${white}"
         system_keygen
@@ -1967,7 +1967,7 @@ onekey_optimization(){
  
         clear
         echo -e "${green}一键优化已完成，BBRx在重启后生效${white}"
-        echo "您现在的SSH端口为55520，您的SSH Key如下，请牢记："
+        echo "您现在的SSH端口为41120，您的SSH Key如下，请牢记："
         cat ~/.ssh/id_rsa
 
         ;;
